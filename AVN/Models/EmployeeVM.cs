@@ -47,7 +47,7 @@ namespace AVN.Models
         [MaxLength(300)]
         public string? Address { get; set; }
 
-        [Required(ErrorMessage = "Введите номер телофона")]
+        [Required(ErrorMessage = "Поле не заполнено")]
         [DisplayName("Номер телефона")]
         [RegularExpression(@"^0\(\d{3}\)\d{2}-\d{2}-\d{2}$", ErrorMessage = "Неправильный номер телефона.")]
         public string? PhoneNumber { get; set; }
