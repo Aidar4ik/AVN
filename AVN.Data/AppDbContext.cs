@@ -40,7 +40,7 @@ namespace AVN.Data
 
             string connectionStrings = config.GetConnectionString("DefaultConnection");
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlServer(connectionStrings);
+            optionsBuilder.UseNpgsql(connectionStrings);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

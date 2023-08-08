@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer("DefaultConnection"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql("DefaultConnection"));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddDefaultTokenProviders()
