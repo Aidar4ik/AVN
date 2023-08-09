@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace AVN.Data.Migrations
 {
-    public partial class wholeDb : Migration
+    public partial class FullPostgresDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +14,11 @@ namespace AVN.Data.Migrations
                 name: "AcademicYears",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    YearFrom = table.Column<int>(type: "int", nullable: false),
-                    YearTo = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    YearFrom = table.Column<int>(type: "integer", nullable: false),
+                    YearTo = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,10 +29,10 @@ namespace AVN.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,21 +43,23 @@ namespace AVN.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    GradeBookNumber = table.Column<string>(type: "text", nullable: true),
+                    FullName = table.Column<string>(type: "text", nullable: true),
+                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -67,11 +70,11 @@ namespace AVN.Data.Migrations
                 name: "Faculties",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FacultyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeanName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FacultyName = table.Column<string>(type: "text", nullable: false),
+                    FacultyShortName = table.Column<string>(type: "text", nullable: true),
+                    DeanName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,10 +85,10 @@ namespace AVN.Data.Migrations
                 name: "MovementTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MoveType = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    MoveType = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,11 +99,11 @@ namespace AVN.Data.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,11 +120,11 @@ namespace AVN.Data.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,10 +141,10 @@ namespace AVN.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    ProviderKey = table.Column<string>(type: "text", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,8 +161,8 @@ namespace AVN.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,10 +185,10 @@ namespace AVN.Data.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    LoginProvider = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,11 +205,11 @@ namespace AVN.Data.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentShortName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DepartmentName = table.Column<string>(type: "text", nullable: false),
+                    DepartmentShortName = table.Column<string>(type: "text", nullable: false),
+                    FacultyId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -222,10 +225,10 @@ namespace AVN.Data.Migrations
                 name: "OrderTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MovementTypeId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    MovementTypeId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -241,16 +244,16 @@ namespace AVN.Data.Migrations
                 name: "Directions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DirectionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DirectionShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DirectionNumber = table.Column<int>(type: "int", nullable: false),
-                    CreditCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AcademicDegree = table.Column<int>(type: "int", nullable: false),
-                    TrainingPeriod = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DirectionName = table.Column<string>(type: "text", nullable: false),
+                    DirectionShortName = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    DirectionNumber = table.Column<int>(type: "integer", nullable: false),
+                    CreditCost = table.Column<decimal>(type: "numeric", nullable: false),
+                    AcademicDegree = table.Column<int>(type: "integer", nullable: false),
+                    TrainingPeriod = table.Column<int>(type: "integer", nullable: false),
+                    DepartmentId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -266,17 +269,17 @@ namespace AVN.Data.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Position = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    SName = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    PName = table.Column<string>(type: "text", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Gender = table.Column<int>(type: "integer", nullable: false),
+                    Position = table.Column<int>(type: "integer", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    DepartmentId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,16 +295,16 @@ namespace AVN.Data.Migrations
                 name: "Groups",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Course = table.Column<int>(type: "int", nullable: false),
-                    DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudingForm = table.Column<int>(type: "int", nullable: false),
-                    AcademicDegree = table.Column<int>(type: "int", nullable: false),
-                    TrainingPeriod = table.Column<int>(type: "int", nullable: false),
-                    GroupType = table.Column<int>(type: "int", nullable: false),
-                    AcademicYearId = table.Column<int>(type: "int", nullable: true),
-                    DirectionId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    GroupName = table.Column<string>(type: "text", nullable: false),
+                    Course = table.Column<int>(type: "integer", nullable: false),
+                    DateCreate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    StudingForm = table.Column<int>(type: "integer", nullable: false),
+                    AcademicDegree = table.Column<int>(type: "integer", nullable: false),
+                    TrainingPeriod = table.Column<int>(type: "integer", nullable: false),
+                    GroupType = table.Column<int>(type: "integer", nullable: false),
+                    AcademicYearId = table.Column<int>(type: "integer", nullable: true),
+                    DirectionId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -322,14 +325,17 @@ namespace AVN.Data.Migrations
                 name: "Subjects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreditHours = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Course = table.Column<int>(type: "int", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    CreditCounts = table.Column<int>(type: "integer", nullable: false),
+                    HoursAmount = table.Column<int>(type: "integer", nullable: false),
+                    Course = table.Column<int>(type: "integer", nullable: false),
+                    Semester = table.Column<int>(type: "integer", nullable: false),
+                    ControlForm = table.Column<int>(type: "integer", nullable: false),
+                    DepartmentId = table.Column<int>(type: "integer", nullable: true),
+                    EmployeeId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -350,8 +356,8 @@ namespace AVN.Data.Migrations
                 name: "GroupEmployees",
                 columns: table => new
                 {
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    GroupId = table.Column<string>(type: "text", nullable: false),
+                    EmployeeId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -374,22 +380,22 @@ namespace AVN.Data.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EducationalLine = table.Column<int>(type: "int", nullable: false),
-                    GradeBookNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Citizenship = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RecruitmentYear = table.Column<int>(type: "int", nullable: false),
-                    IsHasDebt = table.Column<bool>(type: "bit", nullable: false),
-                    Score = table.Column<int>(type: "int", nullable: false),
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    SName = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    PName = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EducationalLine = table.Column<int>(type: "integer", nullable: false),
+                    GradeBookNumber = table.Column<string>(type: "text", nullable: false),
+                    Gender = table.Column<int>(type: "integer", nullable: false),
+                    Citizenship = table.Column<int>(type: "integer", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    RecruitmentYear = table.Column<int>(type: "integer", nullable: false),
+                    IsHasDebt = table.Column<bool>(type: "boolean", nullable: false),
+                    Score = table.Column<int>(type: "integer", nullable: false),
+                    GroupId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -403,15 +409,54 @@ namespace AVN.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Schedules",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Days = table.Column<int>(type: "integer", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    GroupId = table.Column<string>(type: "text", nullable: true),
+                    SubjectId = table.Column<int>(type: "integer", nullable: true),
+                    EmployeeId = table.Column<string>(type: "text", nullable: true),
+                    AcademicYearId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schedules", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Schedules_AcademicYears_AcademicYearId",
+                        column: x => x.AcademicYearId,
+                        principalTable: "AcademicYears",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Schedules_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Schedules_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Schedules_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SubjectEmployees",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeCreditHours = table.Column<int>(type: "int", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: true),
-                    EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    EmployeeId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EmployeeCreditHours = table.Column<int>(type: "integer", nullable: false),
+                    SubjectId = table.Column<int>(type: "integer", nullable: true),
+                    EmployeeId = table.Column<int>(type: "integer", nullable: true),
+                    EmployeeId1 = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -430,20 +475,63 @@ namespace AVN.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GradeBooks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Grade = table.Column<int>(type: "integer", nullable: false),
+                    Points = table.Column<int>(type: "integer", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    AcademicYearId = table.Column<int>(type: "integer", nullable: false),
+                    GroupId = table.Column<string>(type: "text", nullable: false),
+                    SubjectId = table.Column<int>(type: "integer", nullable: false),
+                    StudentId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GradeBooks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GradeBooks_AcademicYears_AcademicYearId",
+                        column: x => x.AcademicYearId,
+                        principalTable: "AcademicYears",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GradeBooks_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GradeBooks_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GradeBooks_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Course = table.Column<int>(type: "int", nullable: false),
-                    MovementTypeId = table.Column<int>(type: "int", nullable: false),
-                    OrderTypeId = table.Column<int>(type: "int", nullable: false),
-                    AcademicYearId = table.Column<int>(type: "int", nullable: true),
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Number = table.Column<string>(type: "text", nullable: false),
+                    Note = table.Column<string>(type: "text", nullable: true),
+                    Course = table.Column<int>(type: "integer", nullable: false),
+                    MovementTypeId = table.Column<int>(type: "integer", nullable: false),
+                    OrderTypeId = table.Column<int>(type: "integer", nullable: false),
+                    AcademicYearId = table.Column<int>(type: "integer", nullable: true),
+                    GroupId = table.Column<string>(type: "text", nullable: true),
+                    StudentId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -481,16 +569,15 @@ namespace AVN.Data.Migrations
                 name: "StudentMovements",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OldGroupId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NewGroupId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MovementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MovementTypeId = table.Column<int>(type: "int", nullable: true),
-                    AcademicYearId = table.Column<int>(type: "int", nullable: true),
-                    StudentId = table.Column<int>(type: "int", nullable: true),
-                    StudentId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OldGroupId = table.Column<string>(type: "text", nullable: false),
+                    NewGroupId = table.Column<string>(type: "text", nullable: false),
+                    MovementDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    OrderNumber = table.Column<string>(type: "text", nullable: false),
+                    MovementTypeId = table.Column<int>(type: "integer", nullable: true),
+                    AcademicYearId = table.Column<int>(type: "integer", nullable: true),
+                    StudentId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -501,13 +588,25 @@ namespace AVN.Data.Migrations
                         principalTable: "AcademicYears",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_StudentMovements_Groups_NewGroupId",
+                        column: x => x.NewGroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentMovements_Groups_OldGroupId",
+                        column: x => x.OldGroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_StudentMovements_MovementTypes_MovementTypeId",
                         column: x => x.MovementTypeId,
                         principalTable: "MovementTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_StudentMovements_Students_StudentId1",
-                        column: x => x.StudentId1,
+                        name: "FK_StudentMovements_Students_StudentId",
+                        column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id");
                 });
@@ -516,16 +615,16 @@ namespace AVN.Data.Migrations
                 name: "StudentPayments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Contract = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Payed = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Debt = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Course = table.Column<int>(type: "int", nullable: false),
-                    RecruitmentYear = table.Column<int>(type: "int", nullable: false),
-                    AcademicYearId = table.Column<int>(type: "int", nullable: true),
-                    GroupId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Contract = table.Column<decimal>(type: "numeric", nullable: false),
+                    Payed = table.Column<decimal>(type: "numeric", nullable: false),
+                    Debt = table.Column<decimal>(type: "numeric", nullable: false),
+                    Course = table.Column<int>(type: "integer", nullable: false),
+                    RecruitmentYear = table.Column<int>(type: "integer", nullable: false),
+                    AcademicYearId = table.Column<int>(type: "integer", nullable: true),
+                    GroupId = table.Column<string>(type: "text", nullable: false),
+                    StudentId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -552,14 +651,14 @@ namespace AVN.Data.Migrations
                 name: "StudentPaymentDetails",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentType = table.Column<int>(type: "int", nullable: false),
-                    SpecialPurpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StudentPaymentId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Payment = table.Column<decimal>(type: "numeric", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Number = table.Column<string>(type: "text", nullable: false),
+                    PaymentType = table.Column<int>(type: "integer", nullable: true),
+                    SpecialPurpose = table.Column<string>(type: "text", nullable: true),
+                    StudentPaymentId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -580,8 +679,7 @@ namespace AVN.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -607,8 +705,7 @@ namespace AVN.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Departments_FacultyId",
@@ -624,6 +721,26 @@ namespace AVN.Data.Migrations
                 name: "IX_Employees_DepartmentId",
                 table: "Employees",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GradeBooks_AcademicYearId",
+                table: "GradeBooks",
+                column: "AcademicYearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GradeBooks_GroupId",
+                table: "GradeBooks",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GradeBooks_StudentId",
+                table: "GradeBooks",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GradeBooks_SubjectId",
+                table: "GradeBooks",
+                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupEmployees_EmployeeId",
@@ -671,6 +788,26 @@ namespace AVN.Data.Migrations
                 column: "MovementTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Schedules_AcademicYearId",
+                table: "Schedules",
+                column: "AcademicYearId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedules_EmployeeId",
+                table: "Schedules",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedules_GroupId",
+                table: "Schedules",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedules_SubjectId",
+                table: "Schedules",
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StudentMovements_AcademicYearId",
                 table: "StudentMovements",
                 column: "AcademicYearId");
@@ -681,9 +818,19 @@ namespace AVN.Data.Migrations
                 column: "MovementTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentMovements_StudentId1",
+                name: "IX_StudentMovements_NewGroupId",
                 table: "StudentMovements",
-                column: "StudentId1");
+                column: "NewGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentMovements_OldGroupId",
+                table: "StudentMovements",
+                column: "OldGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentMovements_StudentId",
+                table: "StudentMovements",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentPaymentDetails_StudentPaymentId",
@@ -749,10 +896,16 @@ namespace AVN.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "GradeBooks");
+
+            migrationBuilder.DropTable(
                 name: "GroupEmployees");
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Schedules");
 
             migrationBuilder.DropTable(
                 name: "StudentMovements");
