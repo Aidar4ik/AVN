@@ -1,4 +1,4 @@
-﻿using Domain.Entities.BaseEntities;
+﻿using AspNetCoreHero.Abstractions.Domain;
 
 namespace Domain.Entities.Catalog
 {

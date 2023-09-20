@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="AspNetCoreHero.Abstractions">
+      <HintPath>C:\Users\miris\.nuget\packages\aspnetcorehero.abstractions\1.0.0\lib\netcoreapp3.1\AspNetCoreHero.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

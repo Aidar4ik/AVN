@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Reference Include="AspNetCoreHero.Results">
+      <HintPath>C:\Users\miris\.nuget\packages\aspnetcorehero.results\1.1.1\lib\netcoreapp3.1\AspNetCoreHero.Results.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
