@@ -8,6 +8,11 @@ namespace Application.Enums
 {
     public enum Roles
     {
-
+        SuperAdmin,
+        Admin,
+        Registrar,
+        Employee,
+        Student,
+        Accountant
     }
 }

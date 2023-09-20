@@ -14,6 +14,6 @@ namespace Application.Interfaces.Contexts
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
-        DbSet<Faculty> Faculties { get; set; }
+        //DbSet<Faculty> Faculties { get; set; }
     }
 }
