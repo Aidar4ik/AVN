@@ -7,7 +7,7 @@ namespace Application.Features.Faculties.Queries.GetAllCashed
 {
     public class GetAllFacultiesCachedQuery : IRequest<Result<List<GetAllFacultiesCachedResponse>>>
     {
-        GetAllFacultiesCachedQuery() { }
+        public GetAllFacultiesCachedQuery() { }
     }
 
     public class GetAllFacultiesCachedQueryHandler : IRequestHandler<GetAllFacultiesCachedQuery, Result<List<GetAllFacultiesCachedResponse>>>
