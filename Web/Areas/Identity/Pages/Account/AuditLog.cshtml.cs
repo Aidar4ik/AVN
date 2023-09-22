@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Web.Abstractions;
 
-namespace AspNetCoreHero.Boilerplate.Web.Areas.Identity.Pages.Account
+namespace Web.Areas.Identity.Pages.Account
 {
     public class AuditLogModel : PageModel
     {
