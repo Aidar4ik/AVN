@@ -1,5 +1,6 @@
 using Api.Extensions;
 using Api.Middlewares;
+using Application.Extensions;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
