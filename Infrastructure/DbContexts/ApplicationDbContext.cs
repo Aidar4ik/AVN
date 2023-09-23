@@ -2,13 +2,9 @@
 using Application.Interfaces.Shared;
 using AspNetCoreHero.Abstractions.Domain;
 using AspNetCoreHero.EntityFrameworkCore.AuditTrail;
+using Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.DbContexts
 {
@@ -24,6 +20,7 @@ namespace Infrastructure.DbContexts
         }
 
         //public DbSet<Product> Products { get; set; } add dbsets
+        public DbSet<Faculty> Faculties { get; set; }
 
         public IDbConnection Connection => Database.GetDbConnection();
 
