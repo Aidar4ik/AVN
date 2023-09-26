@@ -42,6 +42,13 @@ namespace Application.Constants
             public const string Edit = "Permissions.Faculties.Edit";
             public const string Delete = "Permissions.Faculties.Delete";
         }
-        
+        public static class Departments
+        {
+            public const string View = "Permissions.Departments.View";
+            public const string Create = "Permissions.Departments.Create";
+            public const string Edit = "Permissions.Departments.Edit";
+            public const string Delete = "Permissions.Departments.Delete";
+        }
+
     }
 }

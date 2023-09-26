@@ -26,6 +26,7 @@ namespace Infrastructure.Identity.Seeds
             var adminRole = await roleManager.FindByNameAsync("SuperAdmin");
             await roleManager.AddPermissionClaim(adminRole, "Users");
             await roleManager.AddPermissionClaim(adminRole, "Faculties");
+            await roleManager.AddPermissionClaim(adminRole, "Departments");
         }
 
         public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
@@ -33,10 +34,10 @@ namespace Infrastructure.Identity.Seeds
             //Seed Super Admin
             var defaultUser = new ApplicationUser
             {
-                UserName = "mgadaibaev",
-                Email = "miristan.kg@mail.ru",
-                FirstName = "Миристан",
-                LastName = "Гадайбаев",
+                UserName = "ambich_huesos",
+                Email = "ambich_huesos@mail.ru",
+                FirstName = "ambich",
+                LastName = "huesos",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 IsActive = true

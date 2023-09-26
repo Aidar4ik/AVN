@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Department\**" />
+    <EmbeddedResource Remove="Features\Department\**" />
+    <None Remove="Features\Department\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
@@ -24,10 +30,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Department\Queries\" />
   </ItemGroup>
 
 </Project>

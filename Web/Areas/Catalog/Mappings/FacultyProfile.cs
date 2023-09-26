@@ -1,20 +1,20 @@
-﻿using Application.Features.Faculties.Commands.Create;
-using Application.Features.Faculties.Commands.Update;
-using Application.Features.Faculties.Queries.GetAllCashed;
-using Application.Features.Faculties.Queries.GetById;
+﻿using Application.Features.Departments.Commands.Create;
+using Application.Features.Departments.Commands.Update;
+using Application.Features.Departments.Queries.GetAllCashed;
+using Application.Features.Departments.Queries.GetById;
 using AutoMapper;
 using Web.Areas.Catalog.Models;
 
 namespace Web.Areas.Catalog.Mappings
 {
-    internal class FacultyProfile : Profile
+    internal class DepartmentProfile : Profile
     {
-        public FacultyProfile()
+        public DepartmentProfile()
         {
-            CreateMap<GetAllFacultiesCachedResponse, FacultyViewModel>().ReverseMap();
-            CreateMap<GetFacultyByIdResponse, FacultyViewModel>().ReverseMap();
-            CreateMap<CreateFacultyCommand, FacultyViewModel>().ReverseMap();
-            CreateMap<UpdateFacultyCommand, FacultyViewModel>().ReverseMap();
+            CreateMap<GetAllDepartmentsCachedResponse, DepartmentViewModel>().ReverseMap();
+            CreateMap<GetDepartmentByIdResponse, DepartmentViewModel>().ReverseMap();
+            CreateMap<CreateDepartmentCommand, DepartmentViewModel>().ReverseMap();
+            CreateMap<UpdateDepartmentCommand, DepartmentViewModel>().ReverseMap();
         }
     }
 }

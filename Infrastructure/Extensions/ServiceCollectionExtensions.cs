@@ -25,6 +25,8 @@ namespace Infrastructure.Extensions
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>));
             services.AddTransient<IFacultyRepository, FacultyRepository>();
             services.AddTransient<IFacultyCacheRepository, FacultyCacheRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            services.AddTransient<IDepartmentCacheRepository, DepartmentCacheRepository>();
             services.AddTransient<ILogRepository, LogRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

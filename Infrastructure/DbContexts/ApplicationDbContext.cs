@@ -21,6 +21,7 @@ namespace Infrastructure.DbContexts
 
         //public DbSet<Product> Products { get; set; } add dbsets
         public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         public IDbConnection Connection => Database.GetDbConnection();
 
