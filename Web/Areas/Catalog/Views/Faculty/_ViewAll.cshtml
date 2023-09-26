@@ -16,20 +16,20 @@
     </thead>
     <tbody>
 
-        @foreach (var brand in Model)
+        @foreach (var faculty in Model)
         {
             <tr>
                 <td>
-                    @brand.Id
+                    @faculty.Id
                 </td>
                 <td>
-                    @brand.FacultyName
+                    @faculty.FacultyName
                 </td>
                 <td>
-                    @brand.FacultyShortName
+                    @faculty.FacultyShortName
                 </td>
                 <td>
-                    @brand.DeanName
+                    @faculty.DeanName
                 </td>
                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Faculties.Delete)).Result.Succeeded || (AuthorizationService.AuthorizeAsync(User, Permissions.Faculties.Edit)).Result.Succeeded)
                 {
@@ -41,14 +41,13 @@
                             <div class="dropdown-menu shadow animated--grow-in">
                                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Faculties.Edit)).Result.Succeeded)
                                 {
-                                    <a onclick="jQueryModalGet('/catalog/brand/OnGetCreateOrEdit?id=@brand.Id','Edit Brand')" class="dropdown-item"><i class="fas fa-pencil-alt"></i>  Edit</a>
+                                    <a onclick="jQueryModalGet('/catalog/faculty/OnGetCreateOrEdit?id=@faculty.Id','Edit Faculty')" class="dropdown-item"><i class="fas fa-pencil-alt"></i>  Edit</a>
 
                                 }
                                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Faculties.Delete)).Result.Succeeded)
-
                                 {
-                                    <form id="form_delete_@brand.Id" asp-area="Catalog" asp-controller="Brand" method="post" asp-action="OnPostDelete" asp-route-id="@brand.Id" onsubmit="return jQueryModalDelete(this)">
-                                        <a href="javascript:$('#form_delete_@brand.Id').submit();" class="dropdown-item"><i class="fas fa-trash-alt"></i>  Delete</a>
+                                    <form id="form_delete_@faculty.Id" asp-area="Catalog" asp-controller="Faculty" method="post" asp-action="OnPostDelete" asp-route-id="@faculty.Id" onsubmit="return jQueryModalDelete(this)">
+                                        <a href="javascript:$('#form_delete_@faculty.Id').submit();" class="dropdown-item"><i class="fas fa-trash-alt"></i>  Delete</a>
                                     </form>
                                 }
                             </div>

@@ -10,7 +10,7 @@ using Web.Areas.Catalog.Models;
 namespace Web.Areas.Catalog.Controllers
 {
     [Area("Catalog")]
-    public class BrandController : BaseController<BrandController>
+    public class FacultyController : BaseController<FacultyController>
     {
         public IActionResult Index()
         {
@@ -57,12 +57,12 @@ namespace Web.Areas.Catalog.Controllers
             {
                 if (id == 0)
                 {
-                    var createBrandCommand = _mapper.Map<CreateFacultyCommand>(brand);
-                    var result = await _mediator.Send(createBrandCommand);
+                    var createFacultyCommand = _mapper.Map<CreateFacultyCommand>(brand);
+                    var result = await _mediator.Send(createFacultyCommand);
                     if (result.Succeeded)
                     {
                         id = result.Data;
-                        _notify.Success($"Brand with ID {result.Data} Created.");
+                        _notify.Success($"Faculty with ID {result.Data} Created.");
                     }
                     else _notify.Error(result.Message);
                 }
@@ -70,7 +70,7 @@ namespace Web.Areas.Catalog.Controllers
                 {
                     var updateBrandCommand = _mapper.Map<UpdateFacultyCommand>(brand);
                     var result = await _mediator.Send(updateBrandCommand);
-                    if (result.Succeeded) _notify.Information($"Brand with ID {result.Data} Updated.");
+                    if (result.Succeeded) _notify.Information($"Faculty with ID {result.Data} Updated.");
                 }
                 var response = await _mediator.Send(new GetAllFacultiesCachedQuery());
                 if (response.Succeeded)
@@ -98,7 +98,7 @@ namespace Web.Areas.Catalog.Controllers
             var deleteCommand = await _mediator.Send(new DeleteFacultyCommand { Id = id });
             if (deleteCommand.Succeeded)
             {
-                _notify.Information($"Brand with Id {id} Deleted.");
+                _notify.Information($"Faculty with Id {id} Deleted.");
                 var response = await _mediator.Send(new GetAllFacultiesCachedQuery());
                 if (response.Succeeded)
                 {

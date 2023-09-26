@@ -29,10 +29,18 @@ namespace Application.Features.Faculties.Commands.Create
 
         public async Task<Result<int>> Handle(CreateFacultyCommand request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<Faculty>(request);
-            await _facultyRepository.InsertAsync(entity);
-            await _unitOfWork.Commit(cancellationToken);
-            return Result<int>.Success(entity.Id);
+            try
+            {
+                var entity = _mapper.Map<Faculty>(request);
+                await _facultyRepository.InsertAsync(entity);
+                await _unitOfWork.Commit(cancellationToken);
+                return Result<int>.Success(entity.Id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }
