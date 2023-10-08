@@ -1,9 +1,13 @@
-﻿using Application.Features.Departments.Commands.Create;
+﻿using Application.Constants;
+using Application.Features.Departments.Commands.Create;
 using Application.Features.Departments.Commands.Delete;
 using Application.Features.Departments.Commands.Update;
 using Application.Features.Departments.Queries.GetAllCashed;
 using Application.Features.Departments.Queries.GetById;
+using Application.Features.Faculties.Queries.GetAllCashed;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Abstractions;
 using Web.Areas.Catalog.Models;
 
@@ -31,22 +35,33 @@ namespace Web.Areas.Catalog.Controllers
             return null;
         }
 
+        [Authorize(Policy = Permissions.Users.View)]
         public async Task<JsonResult> OnGetCreateOrEdit(int id = 0)
         {
-            var brandsResponse = await _mediator.Send(new GetAllDepartmentsCachedQuery());
+            var facultiesResponse = await _mediator.Send(new GetAllFacultiesCachedQuery());
 
             if (id == 0)
             {
-                var brandViewModel = new DepartmentViewModel();
-                return new JsonResult(new { isValid = true, html = await _viewRenderer.RenderViewToStringAsync("_CreateOrEdit", brandViewModel) });
+                var departmentViewModel = new DepartmentViewModel();
+                if(facultiesResponse.Succeeded)
+                {
+                    var facultyViewModel = _mapper.Map<List<FacultyViewModel>>(facultiesResponse.Data);
+                    departmentViewModel.Faculties = new SelectList(facultyViewModel, nameof(FacultyViewModel.Id), nameof(FacultyViewModel.FacultyName), null, null);
+                }
+                return new JsonResult(new { isValid = true, html = await _viewRenderer.RenderViewToStringAsync("_CreateOrEdit", departmentViewModel) });
             }
             else
             {
                 var response = await _mediator.Send(new GetDepartmentByIdQuery() { Id = id });
                 if (response.Succeeded)
                 {
-                    var brandViewModel = _mapper.Map<DepartmentViewModel>(response.Data);
-                    return new JsonResult(new { isValid = true, html = await _viewRenderer.RenderViewToStringAsync("_CreateOrEdit", brandViewModel) });
+                    var departmentViewModel = _mapper.Map<DepartmentViewModel>(response.Data);
+                    if (facultiesResponse.Succeeded)
+                    {
+                        var facultyViewModel = _mapper.Map<List<FacultyViewModel>>(facultiesResponse.Data);
+                        departmentViewModel.Faculties = new SelectList(facultyViewModel, nameof(FacultyViewModel.Id), nameof(FacultyViewModel.FacultyName), null, null);
+                    }
+                    return new JsonResult(new { isValid = true, html = await _viewRenderer.RenderViewToStringAsync("_CreateOrEdit", departmentViewModel) });
                 }
                 return null;
             }

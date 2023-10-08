@@ -3,7 +3,7 @@
 @model DepartmentViewModel
 <form id="create-form" method="post" asp-controller="Department" asp-action="OnPostCreateOrEdit" asp-route-id="@Model.Id" onsubmit="return jQueryModalPost(this);" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label">@localizer["Name"]</label>
                 <div class="col-md-9">
@@ -12,16 +12,76 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-3 col-form-label">@localizer["DepartmentShortName"]</label>
+                <label class="col-md-3 col-form-label">Крат.</label>
                 <div class="col-md-9">
                     <input type="text" asp-for="DepartmentShortName" name="DepartmentShortName" class="form-control">
                     <span asp-validation-for="DepartmentShortName" class="text-danger"></span>
                 </div>
             </div>
+@*            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Barcode</label>
+                <div class="col-md-9">
+                    @if (Model.Id != 0)
+                    {
+                        <input type="text" as asp-for="Barcode" readonly name="Barcode" class="form-control">
+                    }
+                    else
+                    {
+                        <input type="text" as asp-for="Barcode" name="Barcode" class="form-control">
+                    }
+                    <span asp-validation-for="Barcode" class="text-danger"></span>
+                </div>
+            </div>*@
+            @*<div class="form-group row">
+                <label class="col-md-3 col-form-label">DepartmentShortName</label>
+                <div class="col-md-9">
+                    <textarea rows="6" asp-for="DepartmentShortName" name="DepartmentShortName" class="form-control"></textarea>
+                    <span asp-validation-for="DepartmentShortName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label">Rate</label>
+                <div class="col-md-9">
+                    <input type="number" asp-for="Rate" name="Rate" class="form-control" />
+                    <span asp-validation-for="Rate" class="text-danger"></span>
+                </div>
+            </div>*@
             <div class="form-group row">
                 <div class="col-md-3">
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Faculty</label>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <select name="FacultyId" class="form-control select2bs4" id="FacultyId" asp-for="FacultyId" asp-items="@Model.Faculties">
+                        </select>
+                    </div>
+                    <span asp-validation-for="FacultyId" class="text-danger"></span>
+                </div>
+            </div>
+@*            <div class="form-group">
+                <div class="custom-file form-image">
+                    <input accept=".png,.jpg,.jpeg,.gif,.tif"
+                           asp-for="@Model.Image"
+                           type="file" class="custom-file-input"
+                           onchange="document.getElementById('viewableImage').src = window.URL.createObjectURL(this.files[0])"
+                           id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose Image</label>
+                </div>*@
+@*                if (Model.Image != null && Model.Image.Length > 0)
+                {
+                    <img id="viewableImage" class="viewableImage" asp-for="@Model.Image" style="width: 100%;object-fit: cover;padding-top: 10px;" src="data:image/*;base64,@(Convert.ToBase64String(Model.Image))" alt>*@
+                    @*<button onclick="document.getElementById('achimage').src = null;" type="button" style="margin-top:10px" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Remove Image</button>*@
+               @* }*@
+@*                else
+                {
+                    <img id="viewableImage" class="viewableImage" style="width: 100%;object-fit: cover;padding-top:10px;" src="" alt>
+                }
+            </div>*@
+
         </div>
     </div>
 
@@ -32,4 +92,11 @@
 </form>
 <script type="text/javascript" language=javascript>
     $.validator.unobtrusive.parse(document);
+    $("#FacultyId").select2({
+        placeholder: "Select a Faculty",
+        theme: "bootstrap4",
+        escapeMarkup: function (m) {
+            return m;
+        }
+    });
 </script>

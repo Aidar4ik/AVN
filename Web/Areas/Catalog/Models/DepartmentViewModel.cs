@@ -1,4 +1,6 @@
-﻿namespace Web.Areas.Catalog.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Web.Areas.Catalog.Models
 {
     public class DepartmentViewModel
     {
@@ -6,5 +8,6 @@
         public string DepartmentName { get; set; }
         public string DepartmentShortName { get; set; }
         public int FacultyId { get; set; }
+        public SelectList Faculties { get; set; }
     }
 }
