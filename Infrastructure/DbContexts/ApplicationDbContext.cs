@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces.Contexts;
 using Application.Interfaces.Shared;
 using AspNetCoreHero.Abstractions.Domain;
-using AspNetCoreHero.EntityFrameworkCore.AuditTrail;
 using Domain.Entities.Catalog;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
