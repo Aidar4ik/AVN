@@ -142,7 +142,7 @@ namespace AVN.Models
         public YearRangeAttribute(int minYear)
         {
             _minYear = minYear;
-            _maxYear = DateTime.Now.Year;
+            _maxYear = DateTime.Now.Year+4;
         }
 
         public override bool IsValid(object value)
